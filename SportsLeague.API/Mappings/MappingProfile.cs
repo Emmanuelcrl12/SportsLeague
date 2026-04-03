@@ -57,6 +57,17 @@ opt => opt.MapFrom(src =>
 
 src.TournamentTeams != null ? src.TournamentTeams.Count : 0));
 
+CreateMap<Sponsor, SponsorResponseDTO>();
+CreateMap<SponsorRequestDTO, Sponsor>();
+
+CreateMap<TournamentSponsor, TournamentSponsorResponseDTO>()
+    .ForMember(d => d.TournamentName, o => o.MapFrom(s => s.Tournament.Name))
+    .ForMember(d => d.SponsorName, o => o.MapFrom(s => s.Sponsor.Name));
+
+CreateMap<TournamentSponsorRequestDTO, TournamentSponsor>();
+
+
 }
+
 
 }

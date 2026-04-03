@@ -28,6 +28,9 @@ public DbSet<Tournament> Tournaments => Set<Tournament>(); // NUEVO
 
 public DbSet<TournamentTeam> TournamentTeams => Set<TournamentTeam>(); // NUEVO
 
+public DbSet<Sponsor> Sponsors { get; set; }
+public DbSet<TournamentSponsor> TournamentSponsors { get; set; }
+
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 
@@ -214,6 +217,26 @@ entity.Property(tt => tt.CreatedAt)
 entity.Property(tt => tt.UpdatedAt)
 
 .IsRequired(false);
+
+// --Sponsor Configuration ---
+modelBuilder.Entity<Sponsor>()
+        .HasIndex(s => s.Name)
+        .IsUnique();
+
+    modelBuilder.Entity<TournamentSponsor>()
+        .HasIndex(ts => new { ts.TournamentId, ts.SponsorId })
+        .IsUnique();
+
+    modelBuilder.Entity<TournamentSponsor>()
+        .HasOne(ts => ts.Tournament)
+        .WithMany(t => t.TournamentSponsors)
+        .HasForeignKey(ts => ts.TournamentId);
+
+    modelBuilder.Entity<TournamentSponsor>()
+        .HasOne(ts => ts.Sponsor)
+        .WithMany(s => s.TournamentSponsors)
+        .HasForeignKey(ts => ts.SponsorId);
+
 
 
 // Relación con Tournament

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SportsLeague.API.Services; // <--- Agrega esto
 
 using SportsLeague.DataAccess.Context;
 
@@ -56,12 +57,16 @@ builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>(); // NUEVO
 
+builder.Services.AddScoped<ISponsorRepository, SponsorRepository>();
 
+builder.Services.AddScoped<ITournamentSponsorRepository, TournamentSponsorRepository>();
 // ── Services ──
 
 builder.Services.AddScoped<ITeamService, TeamService>();
 
 builder.Services.AddScoped<IPlayerService, PlayerService>(); // NUEVO
+
+builder.Services.AddScoped<ISponsorService, SponsorService>();
 
 
 // ── AutoMapper ──
