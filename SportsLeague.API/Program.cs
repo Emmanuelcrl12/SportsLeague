@@ -30,10 +30,24 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+
+builder.Services.AddScoped<IRefereeRepository, RefereeRepository>(); // NUEVO
+
+builder.Services.AddScoped<ITournamentRepository, TournamentRepository>(); // NUEVO
+
+builder.Services.AddScoped<ITournamentTeamRepository, TournamentTeamRepository>(); // NUEVO
+
 
 // ── Services ──
 
 builder.Services.AddScoped<ITeamService, TeamService>();
+
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+
+builder.Services.AddScoped<IRefereeService, RefereeService>(); // NUEVO
+
+builder.Services.AddScoped<ITournamentService, TournamentService>(); // NUEVO
 // ── Repositories ──
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
